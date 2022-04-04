@@ -5,6 +5,7 @@ from datetime import datetime
 from subprocess import call
 from exif import Image
 
+# List of Formats where the date should be changed
 list_of_files=["jpeg","JPG","png"]
 
 def extract_original_datetime(file_name, path):
@@ -16,16 +17,19 @@ def extract_original_datetime(file_name, path):
     
     return img
 
+
 def extract_file_ending(file):
 
     file_ending = file.split(".")[-1]
 
     return file_ending
 
+
 def create_image_path(file_name,path):
     img_path = f'{folder_path}/{file}'
 
     return img_path
+
 
 def reformat_date_and_time(orginial_date_string):
     
@@ -38,6 +42,7 @@ def reformat_date_and_time(orginial_date_string):
     correct_time = correct_date_string[-8:]
     
     return correct_day, correct_time
+
 
 def create_list_of_all_files(folder_path):
     
@@ -84,4 +89,4 @@ if __name__ == '__main__':
             command = 'SetFile -d ' + f'"{correct_day} "' + f'{correct_time} ' + file_path
             print(f"Successfully changed the creation date from {file}")
             call(command, shell=True)
-            break
+ 
